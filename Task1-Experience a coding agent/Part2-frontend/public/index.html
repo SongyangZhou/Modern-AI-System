@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Claude Code Runner</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <aside class="sidebar">
+    <button id="new-session" class="new-session" type="button">+ New session</button>
+    <div class="sidebar-label">Sessions</div>
+    <ul id="session-list" class="session-list"></ul>
+    <div class="replay-box">
+      <div class="sidebar-label">Test with a recorded run</div>
+      <div class="replay-row">
+        <select id="replay-file"></select>
+        <button id="replay-btn" type="button">Play</button>
+      </div>
+    </div>
+  </aside>
+
+  <main class="main">
+    <header class="topbar">
+      <div class="topbar-title" id="session-title">New session</div>
+      <span id="session-count" class="session-count"></span>
+      <button id="outline-toggle" class="outline-toggle" type="button">Outline</button>
+      <span id="perm" class="perm" title="Every file edit and command is approved automatically (--dangerously-skip-permissions)">auto-approve on</span>
+      <span id="status" class="status idle">idle</span>
+    </header>
+
+    <section id="transcript" class="transcript" aria-live="polite">
+      <div id="empty" class="empty">Type a request below. Claude Code will work in the folder shown under the box.</div>
+    </section>
+
+    <form id="composer" class="composer">
+      <div id="error-banner" class="error-banner" hidden></div>
+      <div class="composer-box">
+        <textarea id="prompt" rows="3" placeholder="Ask Claude Code to do something…  (Enter to send, Shift+Enter for a new line)"></textarea>
+        <button id="send" type="submit">Send</button>
+        <button id="stop" type="button" hidden>Stop</button>
+      </div>
+      <label class="cwd-row">
+        <span>Working directory</span>
+        <input id="cwd" type="text" spellcheck="false" autocomplete="off">
+      </label>
+    </form>
+  </main>
+
+  <aside id="outline" class="outline" aria-label="Outline of the trajectory">
+    <div class="outline-title">Outline</div>
+    <div id="outline-empty" class="outline-empty">No tool calls yet</div>
+    <ol id="outline-list" class="outline-list"></ol>
+  </aside>
+
+  <script src="vendor/marked.min.js"></script>
+  <script src="vendor/purify.min.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
